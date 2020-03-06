@@ -112,7 +112,7 @@ function processMessage(senderId,event)
   if(event.message.quick_reply.payload)
   {
     var messagePayload = event.message.quick_reply.payload;
-    if(messagePayload === "abonnement")
+    if(messagePayload == "abonnement")
     {
         console.log("on a checké le messagePayload, et c'est abonnement ! ");
       var message = "Ok super nouvelle ! Pour la presse de quel pays souhaitez vous recevoir des notifications ? ";

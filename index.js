@@ -109,8 +109,8 @@ function processMessage(senderId,event)
 {
   console.log("on est arrivé à la fonction processMessage");
 
-  if(event.message.quick_reply.payload)
-  { console.log("on atrouvé le payload : " + event.message.quick_reply.payload);
+  if(event.message.quick_reply)
+  { console.log("on atrouvé le payload : " + event.message.quick_reply);
   /*  var messagePayload = event.message.quick_reply.payload;
     if(messagePayload == "abonnement")
     {

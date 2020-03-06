@@ -110,8 +110,8 @@ function processMessage(senderId,event)
   console.log("on est arrivé à la fonction processMessage");
 
   if(event.message.quick_reply.payload)
-  {
-    var messagePayload = event.message.quick_reply.payload;
+  { console.log("on atrouvé le payload : " + event.message.quick_reply.payload);
+  /*  var messagePayload = event.message.quick_reply.payload;
     if(messagePayload == "abonnement")
     {
         console.log("on a checké le messagePayload, et c'est abonnement ! ");
@@ -131,7 +131,7 @@ function processMessage(senderId,event)
         "payload":"burkina"
       }
     ]});
-    }
+  }*/
   }
 
 }

@@ -48,6 +48,10 @@ app.post("/webhook", function (req, res) {
         if (event.postback) {
           processPostback(event);
         }
+        else if(event.message)
+        {
+          processMessage(sender_psid,event);
+        }
       });
     });
 
@@ -126,6 +130,12 @@ function processPostback(event) {
 
 
 }
+
+function processMessage(senderId,event)
+{
+  console.log("on est arrivé à la fonction processMessage");
+}
+
 
 // sends message to user
 function sendMessage(recipientId, message) {

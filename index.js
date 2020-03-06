@@ -68,24 +68,25 @@ function processPostback(event) {
         greeting = "Bonjour " + name + ". ";
       }
       var message = greeting + "Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour recevoir la presse tous les jours dans ton téléphone ! <3 ";
+      console.log("premier message envoyé");
       sendMessage(senderId, {text: message,quick_replies:[
       {
         "content_type":"text",
         "title":"S'abonner",
-        "payload":"abonnement"        
+        "payload":"abonnement"
       },{
         "content_type":"text",
         "title":"Non merci",
         "payload":"no_abonnement"
       }
     ]});
-      
-            
-        
+
+
+
     });
   }
-    
-    /* else if (payload === "abonnement") {
+
+    else if (payload === "abonnement") {
     // Get user's first name from the User Profile API
     // and include it in the greeting
     request({
@@ -100,40 +101,19 @@ function processPostback(event) {
       if (error) {
         console.log("Error getting user's name: " +  error);
       } else {
-        var bodyObj = JSON.parse(body);
-        name = bodyObj.first_name;
-        rep_abonnement = "Ok " + name + "! ";
+        console.log("ça marche");
       }
-      var message2 = rep_abonnement + "Merci à toi, on va t'envoyer des notifications quand des nouveaux titres de presse sortent ! La presse de quel pays t'intéresse ? ";
-      sendMessage(senderId, {text: message2,quick_replies:[
-      {
-        "content_type":"text",
-        "title":"France",
-        "payload":"france"        
-      },{
-        "content_type":"text",
-        "title":"Côte d'Ivoire",
-        "payload":"civ"
-      },{
-        "content_type":"text",
-        "title":"Sénégal",
-        "payload":"senegal"
-      },{
-        "content_type":"text",
-        "title":"Burkina-Faso",
-        "payload":"burkina"
-      }
-    ]});
-      
-            
-        
+
+
+
+
     });
-  }*/
-    
-    
-    
-    
-    
+  }
+
+
+
+
+
 }
 
 // sends message to user

@@ -133,6 +133,8 @@ function processMessage(senderId,event)
     ]});
   }*/
   }
+  else
+  { console.log("pas de payload dans le message");}
 
 }
 

@@ -101,32 +101,6 @@ function processPostback(event) {
     });
   }
 
-    else if (payload === "abonnement") {
-    // Get user's first name from the User Profile API
-    // and include it in the greeting
-    request({
-      url: "https://graph.facebook.com/v2.6/" + senderId,
-      qs: {
-        access_token: process.env.PAGE_ACCESS_TOKEN,
-        fields: "first_name"
-      },
-      method: "GET"
-    }, function(error, response, body) {
-      var rep_abonnement = "";
-      if (error) {
-        console.log("Error getting user's name: " +  error);
-      } else {
-        console.log("ça marche");
-      }
-
-
-
-
-    });
-  }
-
-
-
 
 
 }
@@ -134,6 +108,32 @@ function processPostback(event) {
 function processMessage(senderId,event)
 {
   console.log("on est arrivé à la fonction processMessage");
+
+  if(event.message.quick_reply.payload)
+  {
+    var messagePayload = event.message.quick_reply.payload;
+    if(messagePayload === "abonnement")
+    {
+        console.log("on a checké le messagePayload, et c'est abonnement ! ");
+      var message = "Ok super nouvelle ! Pour la presse de quel pays souhaitez vous recevoir des notifications ? ";
+      sendMessage(senderId, {text: message,quick_replies:[
+      {
+        "content_type":"text",
+        "title":"Côte d'Ivoire",
+        "payload":"civ"
+      },{
+        "content_type":"text",
+        "title":"Sénégal",
+        "payload":"senegal"
+      },{
+        "content_type":"text",
+        "title":"Brukina-Faso",
+        "payload":"burkina"
+      }
+    ]});
+    }
+  }
+
 }
 
 

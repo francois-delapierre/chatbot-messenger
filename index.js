@@ -199,7 +199,8 @@ function sendCarrouselSenegal(recipientId) {
                       }
                     },
                 }
-  }, function(error, response, body) {
+  }
+}, function(error, response, body) {
     if (error) {
       console.log("Error sending message: " + response.error);
     }

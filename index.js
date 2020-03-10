@@ -132,6 +132,16 @@ function processMessage(senderId,event)
       }
     ]});
   }
+
+
+  else if(messagePayload == "🇸🇳 Sénégal")
+  {
+      console.log("on a checké le messagePayload, et c'est Sénégal ! ");
+
+sendCarrouselSenegal(senderId);
+}
+
+
   }
   else
   { console.log("pas de payload dans le message");}
@@ -149,6 +159,46 @@ function sendMessage(recipientId, message) {
       recipient: {id: recipientId},
       message: message,
     }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
+}
+
+function sendCarrouselSenegal(recipientId) {
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messages",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      recipient: {id: recipientId},
+      message: {
+        attachment:{
+          type: "template",
+            payload": {
+                template_type: "list",
+                top_element_style: "compact",
+                elements: [
+                  {
+            title: "Le Temoin",
+            subtitle: "Quotidien d'actualités",
+            image_url: "http://delapierre.net/letemoin.jpg",
+            buttons: [
+              {
+                title: "Ajouter le titre",
+                type: "web_url",
+                url: "https://youscribe.com",
+                messenger_extensions: "true",
+                webview_height_ratio: tall,
+                fallback_url: "https://youscribe.com/"
+              }
+            ]
+          }
+                ]
+                      }
+                    },
+                }
   }, function(error, response, body) {
     if (error) {
       console.log("Error sending message: " + response.error);

@@ -110,9 +110,9 @@ function processMessage(senderId,event)
   console.log("on est arrivé à la fonction processMessage");
 
   if(event.message.quick_reply)
-  { console.log("on atrouvé le payload : " + event.message.quick_reply + " " +event.message.text);
-  /*  var messagePayload = event.message.quick_reply.payload;
-    if(messagePayload == "abonnement")
+  { console.log("quick_reply avec message text : "  +event.message.text);
+    var messagePayload = event.message.text;
+    if(messagePayload == "S'abonner")
     {
         console.log("on a checké le messagePayload, et c'est abonnement ! ");
       var message = "Ok super nouvelle ! Pour la presse de quel pays souhaitez vous recevoir des notifications ? ";
@@ -131,7 +131,7 @@ function processMessage(senderId,event)
         "payload":"burkina"
       }
     ]});
-  }*/
+  }
   }
   else
   { console.log("pas de payload dans le message");}

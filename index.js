@@ -176,7 +176,7 @@ function sendCarrouselSenegal(recipientId) {
       message: {
         attachment:{
           type: "template",
-            payload": {
+            payload: {
                 template_type: "list",
                 top_element_style: "compact",
                 elements: [

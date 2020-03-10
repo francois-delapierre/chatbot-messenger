@@ -178,7 +178,7 @@ function sendCarrouselSenegal(recipientId) {
           type: "template",
             payload: {
                 template_type: "list",
-                top_element_style: "compact",
+                top_element_style: "large",
                 elements: [
                   {
             title: "Le Temoin",
@@ -194,7 +194,22 @@ function sendCarrouselSenegal(recipientId) {
                 fallback_url: "https://youscribe.com/"
               }
             ]
-          }
+          },
+          {
+    title: "Stades",
+    subtitle: "Quotidien Sportif",
+    image_url: "http://delapierre.net/stades.jpg",
+    buttons: [
+      {
+        title: "Ajouter le titre",
+        type: "web_url",
+        url: "https://youscribe.com",
+        messenger_extensions: "true",
+        webview_height_ratio: "tall",
+        fallback_url: "https://youscribe.com/"
+      }
+    ]
+  }
                 ]
                       }
                     }

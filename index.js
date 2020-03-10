@@ -178,12 +178,12 @@ function sendCarrouselSenegal(recipientId) {
           type: "template",
             payload: {
                 template_type: "list",
-                top_element_style: "large",
+                top_element_style: "compact",
                 elements: [
                   {
             title: "Le Temoin",
-            subtitle: "Quotidien d'actualités",
-            image_url: "http://delapierre.net/letemoin.jpg"/*,
+            subtitle: "Quotidien d'actualités" /*,
+            image_url: "http://delapierre.net/letemoin.jpg",
             buttons: [
               {
                 title: "Ajouter le titre",
@@ -197,8 +197,8 @@ function sendCarrouselSenegal(recipientId) {
           },
           {
     title: "Stades",
-    subtitle: "Quotidien Sportif",
-    image_url: "http://delapierre.net/stades.jpg"/*,
+    subtitle: "Quotidien Sportif" /*,
+    image_url: "http://delapierre.net/stades.jpg",
     buttons: [
       {
         title: "Ajouter le titre",

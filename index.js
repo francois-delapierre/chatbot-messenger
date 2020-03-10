@@ -82,7 +82,7 @@ function processPostback(event) {
         name = bodyObj.first_name;
         greeting = "Bonjour " + name + ". ";
       }
-      var message = greeting + "Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour recevoir la presse tous les jours dans ton téléphone ! 🕮 ";
+      var message = greeting + "Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour recevoir la presse tous les jours dans ton téléphone ! :) \\U1F4DA ";
       console.log("premier message envoyé");
       sendMessage(senderId, {text: message,quick_replies:[
       {

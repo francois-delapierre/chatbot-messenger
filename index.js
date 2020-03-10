@@ -137,8 +137,7 @@ function processMessage(senderId,event)
   else if(messagePayload == "🇸🇳 Sénégal")
   {
       console.log("on a checké le messagePayload, et c'est Sénégal ! ");
-
-sendCarrouselSenegal(senderId);
+      sendCarrouselSenegal(senderId);
 }
 
 
@@ -167,6 +166,7 @@ function sendMessage(recipientId, message) {
 }
 
 function sendCarrouselSenegal(recipientId) {
+  console.log("on est dans la fonction sendCarrouselSenegal");
   request({
     url: "https://graph.facebook.com/v2.6/me/messages",
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -183,7 +183,7 @@ function sendCarrouselSenegal(recipientId) {
                   {
             title: "Le Temoin",
             subtitle: "Quotidien d'actualités",
-            image_url: "http://delapierre.net/letemoin.jpg",
+            image_url: "http://delapierre.net/letemoin.jpg"/*,
             buttons: [
               {
                 title: "Ajouter le titre",
@@ -193,12 +193,12 @@ function sendCarrouselSenegal(recipientId) {
                 webview_height_ratio: "tall",
                 fallback_url: "https://youscribe.com/"
               }
-            ]
+            ]*/
           },
           {
     title: "Stades",
     subtitle: "Quotidien Sportif",
-    image_url: "http://delapierre.net/stades.jpg",
+    image_url: "http://delapierre.net/stades.jpg"/*,
     buttons: [
       {
         title: "Ajouter le titre",
@@ -208,7 +208,7 @@ function sendCarrouselSenegal(recipientId) {
         webview_height_ratio: "tall",
         fallback_url: "https://youscribe.com/"
       }
-    ]
+    ]*/
   }
                 ]
                       }

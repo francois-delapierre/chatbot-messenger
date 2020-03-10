@@ -119,15 +119,15 @@ function processMessage(senderId,event)
       sendMessage(senderId, {text: message,quick_replies:[
       {
         "content_type":"text",
-        "title":"Côte d'Ivoire",
+        "title":"🇨🇮 Côte d'Ivoire",
         "payload":"civ"
       },{
         "content_type":"text",
-        "title":"Sénégal",
+        "title":"🇸🇳 Sénégal",
         "payload":"senegal"
       },{
         "content_type":"text",
-        "title":"Brukina-Faso",
+        "title":"🇧🇫 Burkina-Faso",
         "payload":"burkina"
       }
     ]});

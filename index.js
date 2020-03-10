@@ -190,7 +190,7 @@ function sendCarrouselSenegal(recipientId) {
                 type: "web_url",
                 url: "https://youscribe.com",
                 messenger_extensions: "true",
-                webview_height_ratio: tall,
+                webview_height_ratio: "tall",
                 fallback_url: "https://youscribe.com/"
               }
             ]

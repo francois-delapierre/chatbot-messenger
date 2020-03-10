@@ -177,11 +177,12 @@ function sendCarrouselSenegal(recipientId) {
         attachment:{
           type: "template",
             payload: {
-                template_type: "list",
-                top_element_style: "compact",
+                template_type: "generic",
+                image_aspect_ratio: "square",
                 elements: [
                   {
             title: "Le Temoin",
+            image_url:"http://delapierre.net/letemoin.jpg",
             subtitle: "Quotidien d'actualités" /*,
             image_url: "http://delapierre.net/letemoin.jpg",
             buttons: [
@@ -197,6 +198,7 @@ function sendCarrouselSenegal(recipientId) {
           },
           {
     title: "Stades",
+    image_url:"http://delapierre.net/stades.jpg",
     subtitle: "Quotidien Sportif" /*,
     image_url: "http://delapierre.net/stades.jpg",
     buttons: [
@@ -222,14 +224,39 @@ function sendCarrouselSenegal(recipientId) {
   });
 }
 
-
-
-
 /*
+curl -X POST -H "Content-Type: application/json" -d '{
+  "recipient":{
+    "id":"2780420635372971"
+  },
+  "message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "image_aspect_ratio" : "square",
+        "elements":[
+           {
+            "title":"Welcome!",
+            "image_url":"http://delapierre.net/letemoin.jpg",
+            "subtitle":"We have the right hat for everyone."
+          },
+          {
+           "title":"Welcome!",
+           "image_url":"http://delapierre.net/stades.jpg",
+           "subtitle":"We have the right hat for everyone."
+         }
+        ]
+      }
+    }
+  }
+}' "https://graph.facebook.com/v2.6/me/messages?access_token=EAALHIOpntbgBAF4M1Py3M5TM7ZBqZAZCPkbcZCUZCsD5ecZAm2dcEAF1KOxcZCm81cYoUiEc4d87WEw3sAuDk5UQJQlclENAJkMyJYvREkEDxythLysmdZAEWsQTXSFZCM08wpqQo6tBekMStzQRcaGx0veSoqIgEDNaPYVs8J2bX9gZDZD"
+
+
 
 curl -X POST -H "Content-Type: application/json" -d '{
   "recipient":{
-    "id":"RECIPIENT_ID"
+    "id":"2780420635372971"
   },
   "message": {
     "attachment": {
@@ -241,60 +268,21 @@ curl -X POST -H "Content-Type: application/json" -d '{
           {
             "title": "Classic T-Shirt Collection",
             "subtitle": "See all our colors",
-            "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",
-            "buttons": [
-              {
-                "title": "View",
-                "type": "web_url",
-                "url": "https://peterssendreceiveapp.ngrok.io/collection",
-                "messenger_extensions": true,
-                "webview_height_ratio": "tall",
-                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-              }
-            ]
+            "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png"
           },
           {
             "title": "Classic White T-Shirt",
-            "subtitle": "See all our colors",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
-              "messenger_extensions": false,
-              "webview_height_ratio": "tall"
-            }
+            "subtitle": "See all our colors"
           },
           {
             "title": "Classic Blue T-Shirt",
             "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
-            "subtitle": "100% Cotton, 200% Comfortable",
-            "default_action": {
-              "type": "web_url",
-              "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
-              "messenger_extensions": true,
-              "webview_height_ratio": "tall",
-              "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-            },
-            "buttons": [
-              {
-                "title": "Shop Now",
-                "type": "web_url",
-                "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
-                "messenger_extensions": true,
-                "webview_height_ratio": "tall",
-                "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-              }
-            ]
-          }
-        ],
-         "buttons": [
-          {
-            "title": "View More",
-            "type": "postback",
-            "payload": "payload"
+            "subtitle": "100% Cotton, 200% Comfortable"
+
           }
         ]
       }
     }
   }
-}' "https://graph.facebook.com/me/messages?access_token=PAGE_ACCESS_TOKEN"
+}' "https://graph.facebook.com/me/messages?access_token=EAALHIOpntbgBAF4M1Py3M5TM7ZBqZAZCPkbcZCUZCsD5ecZAm2dcEAF1KOxcZCm81cYoUiEc4d87WEw3sAuDk5UQJQlclENAJkMyJYvREkEDxythLysmdZAEWsQTXSFZCM08wpqQo6tBekMStzQRcaGx0veSoqIgEDNaPYVs8J2bX9gZDZD"
 */

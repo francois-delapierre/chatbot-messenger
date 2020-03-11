@@ -89,26 +89,61 @@ function processPostback(event) {
 }
 
 function processMessage(senderId,event){
-  console.log("on est arrivé à la fonction processMessage");
+  console.log("Fonction en cours : processMessage");
 
-  if(event.message.quick_reply)
+  if(event.message.quick_reply.payload)
   { console.log("quick_reply avec message text : "  +event.message.quick_reply.payload);
-    var messagePayload = event.message.text;
+    var messagePayload = event.message.quick_reply.payload;
 
-    if(messagePayload == "S'abonner")  {
-        console.log("on a checké le messagePayload, et c'est abonnement ! ");
+    if(messagePayload == "ABONNEMENT")  {
+        console.log("Payload détecté : " + messagePayload);
         sendSelectCountry(senderId);
       }
 
 
-    else if(messagePayload == "🇸🇳 Sénégal")  {
-        console.log("on a checké le messagePayload, et c'est Sénégal ! ");
+    else if(messagePayload == "SENEGAL")  {
+        console.log("Payload détecté : " + messagePayload);
         sendCarrouselSenegal(senderId);
     }
+
+
+
+    else if(messagePayload == "NOTIFICATION_LETEMOIN")  {
+        console.log("Payload détecté : " + messagePayload);
+        var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Le Témoin sort sur YouScribe";
+        sendShortMessage(senderId, message_a_envoyer);
+    }
+
+
+    else if(messagePayload == "NOTIFICATION_STADES")  {
+        console.log("Payload détecté : " + messagePayload);
+        var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Stades sort sur YouScribe";
+        sendShortMessage(senderId, message_a_envoyer);
+    }
+
   }
 
   else
-  { console.log("pas de payload dans le message");}
+  { console.log("Pas de payload détecté");}
+}
+
+
+function sendShortMessage(recipientId, message) {
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messages",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      recipient: {id: recipientId},
+      message: {
+        text : message
+      }
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
 }
 
 
@@ -140,7 +175,6 @@ function sendGreeting(recipientId,userName) {
     }
   });
 }
-
 
 
 function sendSelectCountry(recipientId) {
@@ -178,7 +212,7 @@ function sendSelectCountry(recipientId) {
 
 
 function sendCarrouselSenegal(recipientId) {
-  console.log("on est dans la fonction sendCarrouselSenegal");
+  console.log("Fonction en cours : sendCarrouselSenegal");
   request({
     url: "https://graph.facebook.com/v2.6/me/messages",
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -195,34 +229,26 @@ function sendCarrouselSenegal(recipientId) {
                   {
             title: "Le Temoin",
             image_url:"http://delapierre.net/letemoin.jpg",
-            subtitle: "Quotidien d'actualités" /*,
-            image_url: "http://delapierre.net/letemoin.jpg",
+            subtitle: "Quotidien d'actualités" ,
             buttons: [
-              {
-                title: "Ajouter le titre",
-                type: "web_url",
-                url: "https://youscribe.com",
-                messenger_extensions: "true",
-                webview_height_ratio: "tall",
-                fallback_url: "https://youscribe.com/"
-              }
-            ]*/
+                {
+                type: "postback",
+                title: "Activer les notifications",
+                payload: "NOTIFICATION_LETEMOIN"
+                }
+            ]
           },
           {
     title: "Stades",
     image_url:"http://delapierre.net/stades.jpg",
-    subtitle: "Quotidien Sportif" /*,
-    image_url: "http://delapierre.net/stades.jpg",
+    subtitle: "Quotidien Sportif" ,
     buttons: [
-      {
-        title: "Ajouter le titre",
-        type: "web_url",
-        url: "https://youscribe.com",
-        messenger_extensions: "true",
-        webview_height_ratio: "tall",
-        fallback_url: "https://youscribe.com/"
-      }
-    ]*/
+        {
+        type: "postback",
+        title: "Activer les notifications",
+        payload: "NOTIFICATION_STADES"
+        }
+    ]
   }
                 ]
                       }

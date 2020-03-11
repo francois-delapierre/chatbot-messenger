@@ -80,23 +80,9 @@ function processPostback(event) {
       } else {
         var bodyObj = JSON.parse(body);
         name = bodyObj.first_name;
-        greeting = "Bonjour " + name + ". ";
-      }
-      var message = greeting + "Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour recevoir la presse tous les jours dans ton téléphone ! :) 📚 ";
-      console.log("premier message envoyé");
-      sendMessage(senderId, {text: message,quick_replies:[
-      {
-        "content_type":"text",
-        "title":"S'abonner",
-        "payload":"abonnement"
-      },{
-        "content_type":"text",
-        "title":"Non merci",
-        "payload":"no_abonnement"
-      }
-    ]});
 
-
+      }
+      sendGreeting(senderId,name);
 
     });
   }
@@ -105,8 +91,7 @@ function processPostback(event) {
 
 }
 
-function processMessage(senderId,event)
-{
+function processMessage(senderId,event){
   console.log("on est arrivé à la fonction processMessage");
 
   if(event.message.quick_reply)
@@ -164,6 +149,39 @@ function sendMessage(recipientId, message) {
     }
   });
 }
+
+function sendGreeting(recipientId,userName) {
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messages",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      recipient: {id: recipientId},
+      message: {
+        text : "Bonjour "+ userName + " ! Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour recevoir la presse tous les jours dans ton téléphone ! :) 📚 ",
+        quick_replies : [
+          { content_type : "text",
+            title : "S'abonner",
+            payload : "ABONNEMENT"
+          },
+          { content_type : "text",
+            title : "Non merci",
+            payload : "NON_ABONNEMENT"
+          }
+        ]
+
+      }
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
+}
+
+
+
+
 
 function sendCarrouselSenegal(recipientId) {
   console.log("on est dans la fonction sendCarrouselSenegal");
@@ -223,66 +241,3 @@ function sendCarrouselSenegal(recipientId) {
     }
   });
 }
-
-/*
-curl -X POST -H "Content-Type: application/json" -d '{
-  "recipient":{
-    "id":"2780420635372971"
-  },
-  "message":{
-    "attachment":{
-      "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "image_aspect_ratio" : "square",
-        "elements":[
-           {
-            "title":"Welcome!",
-            "image_url":"http://delapierre.net/letemoin.jpg",
-            "subtitle":"We have the right hat for everyone."
-          },
-          {
-           "title":"Welcome!",
-           "image_url":"http://delapierre.net/stades.jpg",
-           "subtitle":"We have the right hat for everyone."
-         }
-        ]
-      }
-    }
-  }
-}' "https://graph.facebook.com/v2.6/me/messages?access_token=EAALHIOpntbgBAF4M1Py3M5TM7ZBqZAZCPkbcZCUZCsD5ecZAm2dcEAF1KOxcZCm81cYoUiEc4d87WEw3sAuDk5UQJQlclENAJkMyJYvREkEDxythLysmdZAEWsQTXSFZCM08wpqQo6tBekMStzQRcaGx0veSoqIgEDNaPYVs8J2bX9gZDZD"
-
-
-
-curl -X POST -H "Content-Type: application/json" -d '{
-  "recipient":{
-    "id":"2780420635372971"
-  },
-  "message": {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "list",
-        "top_element_style": "compact",
-        "elements": [
-          {
-            "title": "Classic T-Shirt Collection",
-            "subtitle": "See all our colors",
-            "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png"
-          },
-          {
-            "title": "Classic White T-Shirt",
-            "subtitle": "See all our colors"
-          },
-          {
-            "title": "Classic Blue T-Shirt",
-            "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
-            "subtitle": "100% Cotton, 200% Comfortable"
-
-          }
-        ]
-      }
-    }
-  }
-}' "https://graph.facebook.com/me/messages?access_token=EAALHIOpntbgBAF4M1Py3M5TM7ZBqZAZCPkbcZCUZCsD5ecZAm2dcEAF1KOxcZCm81cYoUiEc4d87WEw3sAuDk5UQJQlclENAJkMyJYvREkEDxythLysmdZAEWsQTXSFZCM08wpqQo6tBekMStzQRcaGx0veSoqIgEDNaPYVs8J2bX9gZDZD"
-*/

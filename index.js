@@ -92,7 +92,7 @@ function processMessage(senderId,event){
   console.log("on est arrivé à la fonction processMessage");
 
   if(event.message.quick_reply)
-  { console.log("quick_reply avec message text : "  +event.message.text);
+  { console.log("quick_reply avec message text : "  +event.message.quick_reply.payload);
     var messagePayload = event.message.text;
 
     if(messagePayload == "S'abonner")  {

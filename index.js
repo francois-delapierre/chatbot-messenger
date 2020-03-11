@@ -74,16 +74,13 @@ function processPostback(event) {
       },
       method: "GET"
     }, function(error, response, body) {
-      var greeting = "";
       if (error) {
         console.log("Error getting user's name: " +  error);
       } else {
         var bodyObj = JSON.parse(body);
         name = bodyObj.first_name;
-
       }
       sendGreeting(senderId,name);
-
     });
   }
 
@@ -97,58 +94,23 @@ function processMessage(senderId,event){
   if(event.message.quick_reply)
   { console.log("quick_reply avec message text : "  +event.message.text);
     var messagePayload = event.message.text;
-    if(messagePayload == "S'abonner")
-    {
+
+    if(messagePayload == "S'abonner")  {
         console.log("on a checké le messagePayload, et c'est abonnement ! ");
-      var message = "Ok super nouvelle ! Pour la presse de quel pays souhaitez vous recevoir des notifications ? ";
-      sendMessage(senderId, {text: message,quick_replies:[
-      {
-        "content_type":"text",
-        "title":"🇨🇮 Côte d'Ivoire",
-        "payload":"civ"
-      },{
-        "content_type":"text",
-        "title":"🇸🇳 Sénégal",
-        "payload":"senegal"
-      },{
-        "content_type":"text",
-        "title":"🇧🇫 Burkina-Faso",
-        "payload":"burkina"
+        sendSelectCountry(senderId);
       }
-    ]});
+
+
+    else if(messagePayload == "🇸🇳 Sénégal")  {
+        console.log("on a checké le messagePayload, et c'est Sénégal ! ");
+        sendCarrouselSenegal(senderId);
+    }
   }
 
-
-  else if(messagePayload == "🇸🇳 Sénégal")
-  {
-      console.log("on a checké le messagePayload, et c'est Sénégal ! ");
-      sendCarrouselSenegal(senderId);
-}
-
-
-  }
   else
   { console.log("pas de payload dans le message");}
-
 }
 
-
-// sends message to user
-function sendMessage(recipientId, message) {
-  request({
-    url: "https://graph.facebook.com/v2.6/me/messages",
-    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-    method: "POST",
-    json: {
-      recipient: {id: recipientId},
-      message: message,
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
-    }
-  });
-}
 
 function sendGreeting(recipientId,userName) {
   request({
@@ -181,6 +143,38 @@ function sendGreeting(recipientId,userName) {
 
 
 
+function sendSelectCountry(recipientId) {
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messages",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      recipient: {id: recipientId},
+      message: {
+        text : "Ok  super nouvelle ! Pour la presse de quel pays souhaitez vous recevoir des notifications ? ",
+        quick_replies : [
+          { content_type : "text",
+            title : "🇸🇳 Sénégal",
+            payload : "SENEGAL"
+          },
+          { content_type : "text",
+            title : "🇨🇮 Côte d'Ivoire",
+            payload : "COTE_D_IVOIRE"
+          },
+          { content_type : "text",
+            title : "🇧🇫 Burkina-Faso",
+            payload : "BURKINA_FASO"
+          }
+        ]
+
+      }
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
+}
 
 
 function sendCarrouselSenegal(recipientId) {

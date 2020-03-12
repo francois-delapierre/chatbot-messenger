@@ -124,6 +124,8 @@ function processMessage(senderId,event){
 
     else if(messagePayload == "SENEGAL")  {
         console.log("Payload détecté : " + messagePayload);
+        var message_a_envoyer = "D'ailleurs, tu veux bien nous dire quel visuel tu préfèrerais pour l'audiobook ? 🧐 📻 "
+        sendShortMessage(senderId, message_a_envoyer);
         sendCarrouselSenegal(senderId);
     }
   }
@@ -274,24 +276,24 @@ function sendCarrouselSenegal(recipientId) {
                 elements: [
                   {
             title: "Visuel 1",
-            image_url:"http://delapierre.net/youscribe/audiobook1.jpg",
+            image_url:"https://delapierre.net/youscribe/audiobook1.jpg",
             subtitle: "Plutôt branché technologie" ,
             buttons: [
                 {
                 type: "postback",
-                title: "Activer les notifications",
+                title: "Voter",
                 payload: "NOTIFICATION_LETEMOIN"
                 }
             ]
           },
           {
     title: "Visuel 2",
-    image_url:"http://delapierre.net/youscribe/audiobook2.jpg",
+    image_url:"https://delapierre.net/youscribe/audiobook2.jpg",
     subtitle: "Plutôt branché bouquins" ,
     buttons: [
         {
         type: "postback",
-        title: "Activer les notifications",
+        title: "Voter",
         payload: "NOTIFICATION_STADES"
         }
     ]

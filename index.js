@@ -137,7 +137,7 @@ function processMessage(senderId,event){
 
 
 function activatePersistentMenu(recipientId) {
-  console("Fonction en cours : activatePersistentMenu");
+  console.log("Fonction en cours : activatePersistentMenu");
   request({
     url: "https://graph.facebook.com/v6.0/me/custom_user_settings",
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},

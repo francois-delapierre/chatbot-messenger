@@ -88,14 +88,14 @@ function processPostback(event) {
 
   else if(payload == "NOTIFICATION_LETEMOIN")  {
       console.log("Payload détecté : " + payload);
-      var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Le Témoin sort sur YouScribe";
+      var message_a_envoyer = "Ok, on a pris ton vote en compte ! Plutôt un visuel 100% tech ;) ";
       sendShortMessage(senderId, message_a_envoyer);
   }
 
 
   else if(payload == "NOTIFICATION_STADES")  {
       console.log("Payload détecté : " + payload);
-      var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Stades sort sur YouScribe";
+      var message_a_envoyer = "Ok, c'est bien noté ! Donc plutôt old-school, on garde des livres dans le visuel ! ;)";
       sendShortMessage(senderId, message_a_envoyer);
   }
 
@@ -201,7 +201,7 @@ function sendGreeting(recipientId,userName) {
     json: {
       recipient: {id: recipientId},
       message: {
-        text : "Bonjour "+ userName + " ! Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour recevoir la presse tous les jours dans ton téléphone ! :) 📚 ",
+        text : "Bonjour "+ userName + " ! Je suis Marie, bienvenue chez YouScribe ! Je te propose de t'abonner aux notifications pour suivre l'opération Voix d'Afrique en direct ! :) 📚 ",
         quick_replies : [
           { content_type : "text",
             title : "S'abonner",
@@ -231,7 +231,7 @@ function sendSelectCountry(recipientId) {
     json: {
       recipient: {id: recipientId},
       message: {
-        text : "Ok  super nouvelle ! Pour la presse de quel pays veux-tu recevoir des notifications ? ",
+        text : "Ok  super nouvelle ! Pour mieux te connaître, est-ce que tu peux me dire de quel pays tu viens ? ",
         quick_replies : [
           { content_type : "text",
             title : "🇸🇳 Sénégal",
@@ -273,9 +273,9 @@ function sendCarrouselSenegal(recipientId) {
                 image_aspect_ratio: "square",
                 elements: [
                   {
-            title: "Le Temoin",
-            image_url:"http://delapierre.net/letemoin.jpg",
-            subtitle: "Quotidien d'actualités" ,
+            title: "Visuel 1",
+            image_url:"http://delapierre.net/youscribe/audiobook1.jpg",
+            subtitle: "Plutôt branché technologie" ,
             buttons: [
                 {
                 type: "postback",
@@ -285,9 +285,9 @@ function sendCarrouselSenegal(recipientId) {
             ]
           },
           {
-    title: "Stades",
-    image_url:"http://delapierre.net/stades.jpg",
-    subtitle: "Quotidien Sportif" ,
+    title: "Visuel 2",
+    image_url:"http://delapierre.net/youscribe/audiobook2.jpg",
+    subtitle: "Plutôt branché bouquins" ,
     buttons: [
         {
         type: "postback",

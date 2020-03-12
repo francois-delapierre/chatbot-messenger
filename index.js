@@ -231,7 +231,7 @@ function sendSelectCountry(recipientId) {
     json: {
       recipient: {id: recipientId},
       message: {
-        text : "Ok  super nouvelle ! Pour la presse de quel pays souhaitez vous recevoir des notifications ? ",
+        text : "Ok  super nouvelle ! Pour la presse de quel pays veux-tu recevoir des notifications ? ",
         quick_replies : [
           { content_type : "text",
             title : "🇸🇳 Sénégal",

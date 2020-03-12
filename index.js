@@ -97,6 +97,12 @@ function processPostback(event) {
       sendShortMessage(senderId, message_a_envoyer);
   }
 
+  else if(payload == "TALK_TO_YOUSCRIBE")  {
+      console.log("Payload détecté : " + payload);
+      var message_a_envoyer = "Ok, un membre de la team YouScribe va bientôt te contacter ! A tout de suite ! ;)";
+      sendShortMessage(senderId, message_a_envoyer);
+  }
+
 
 
 }
@@ -122,6 +128,48 @@ function processMessage(senderId,event){
 
   else
   { console.log("Pas de payload détecté");}
+}
+
+
+
+
+
+function activatePersistentMenu(recipientId) {
+  request({
+    url: "https://graph.facebook.com/v6.0/me/custom_user_settings",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      psid: recipientId,
+      persistent_menu: [
+        {locale : "default",
+        composer_input_disabled : "false",
+        call_to_action : [
+          {
+            type : "postback",
+            title : "Parler à la team YouScribe",
+            payload : "TALK_TO_YOUSCRIBE"
+          },
+          {
+            type : "postback",
+            title : "Redémarrer le bot",
+            payload : "Greeting"
+          },
+          {
+            type : "web_url",
+            title : "Aller sur YouScribe",
+            url : "https://www.youscribe.com/",
+            webview_height_ratio : "full"
+          }
+        ]
+        }
+      ]
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
 }
 
 

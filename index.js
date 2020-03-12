@@ -91,7 +91,7 @@ function processPostback(event) {
 function processMessage(senderId,event){
   console.log("Fonction en cours : processMessage");
 
-  if(event.message.quick_reply.payload)
+  if(event.message.quick_reply)
   { console.log("quick_reply avec message text : "  +event.message.quick_reply.payload);
     var messagePayload = event.message.quick_reply.payload;
 
@@ -135,9 +135,7 @@ function sendShortMessage(recipientId, message) {
     method: "POST",
     json: {
       recipient: {id: recipientId},
-      message: {
-        text : message
-      }
+      message: {text : message}
     }
   }, function(error, response, body) {
     if (error) {

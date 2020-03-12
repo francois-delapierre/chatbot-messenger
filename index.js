@@ -84,6 +84,19 @@ function processPostback(event) {
     });
   }
 
+  else if(payload == "NOTIFICATION_LETEMOIN")  {
+      console.log("Payload détecté : " + payload);
+      var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Le Témoin sort sur YouScribe";
+      sendShortMessage(senderId, message_a_envoyer);
+  }
+
+
+  else if(payload == "NOTIFICATION_STADES")  {
+      console.log("Payload détecté : " + payload);
+      var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Stades sort sur YouScribe";
+      sendShortMessage(senderId, message_a_envoyer);
+  }
+
 
 
 }
@@ -105,22 +118,6 @@ function processMessage(senderId,event){
         console.log("Payload détecté : " + messagePayload);
         sendCarrouselSenegal(senderId);
     }
-
-
-
-    else if(messagePayload == "NOTIFICATION_LETEMOIN")  {
-        console.log("Payload détecté : " + messagePayload);
-        var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Le Témoin sort sur YouScribe";
-        sendShortMessage(senderId, message_a_envoyer);
-    }
-
-
-    else if(messagePayload == "NOTIFICATION_STADES")  {
-        console.log("Payload détecté : " + messagePayload);
-        var message_a_envoyer = "Ok, on t'enverra des notifications à chaque fois que Stades sort sur YouScribe";
-        sendShortMessage(senderId, message_a_envoyer);
-    }
-
   }
 
   else

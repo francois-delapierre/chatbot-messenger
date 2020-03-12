@@ -143,11 +143,11 @@ function activatePersistentMenu(recipientId) {
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
     method: "POST",
     json: {
-      psid: recipientId,
+      psid : recipientId,
       persistent_menu: [
         {locale : "default",
         composer_input_disabled : "false",
-        call_to_action : [
+        call_to_actions : [
           {
             type : "postback",
             title : "Parler à la team YouScribe !",

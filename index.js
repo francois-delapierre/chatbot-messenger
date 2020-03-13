@@ -47,14 +47,21 @@ app.get("/", function (req, res) {
 var UserModel = mongoose.model('UserModel', UserSchema );
 
 
-var rechercheUser =  await UserModel.exists({'psid' : '123456'});
-
-console.log("RETOUR DE MODEL.EXISTS : " + rechercheUser );
-var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Oui' });
-test_user.save(function (err) {
-  if (err) return handleError(err);
-  // saved!
+UserModel.count({psid: '123456'}, function (err, count){
+    if(count>0){
+        console.log('le psid 123456 existe déjà !');
+    }
+    else {
+      var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Oui' });
+      test_user.save(function (err) {
+        if (err) return handleError(err);
+        // saved!
+      });
+    }
 });
+
+
+
 
 
 // Facebook Webhook

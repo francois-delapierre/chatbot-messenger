@@ -47,12 +47,12 @@ app.get("/", function (req, res) {
 var UserModel = mongoose.model('UserModel', UserSchema );
 
 
-UserModel.count({psid: '123456'}, function (err, count){
+UserModel.count({psid: '1234567'}, function (err, count){
     if(count>0){
         console.log('le psid 123456 existe déjà !');
     }
     else {
-      var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Oui' });
+      var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Non' });
       test_user.save(function (err) {
         if (err) return handleError(err);
         // saved!

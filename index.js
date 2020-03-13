@@ -46,7 +46,10 @@ app.get("/", function (req, res) {
 
 var UserModel = mongoose.model('UserModel', UserSchema );
 
-console.log("RETOUR DE MODEL.EXISTS : " + await UserModel.exists({'psid' : '123456'}));
+
+var rechercheUser = await await UserModel.exists({'psid' : '123456'});
+
+console.log("RETOUR DE MODEL.EXISTS : " + rechercheUser );
 var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Oui' });
 test_user.save(function (err) {
   if (err) return handleError(err);

@@ -37,6 +37,21 @@ app.get("/", function (req, res) {
    });
 
 
+   var Schema = mongoose.Schema;
+
+   var UserSchema = new Schema({
+        psid: String,
+        subscriptionVDA: String
+        });
+
+var UserModel = mongoose.model('UserModel', UserSchema );
+
+var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Oui' });
+test_user.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+});
+
 
 // Facebook Webhook
 // Used for verification

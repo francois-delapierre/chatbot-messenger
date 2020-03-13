@@ -12,7 +12,7 @@ app.get("/", function (req, res) {
   res.send("Deployed!");
 });
 
-
+/*
 //MongoDB Connexion
 
    var http = require ('http');         // For serving a basic web page.
@@ -41,7 +41,8 @@ app.get("/", function (req, res) {
 
    var UserSchema = new Schema({
         psid: String,
-        subscriptionVDA: String
+        subscriptionVDA: String,
+
         });
 
 var UserModel = mongoose.model('UserModel', UserSchema );
@@ -58,6 +59,21 @@ UserModel.count({psid: '1234567'}, function (err, count){
         // saved!
       });
     }
+});
+
+*/
+
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://francois-delapierre:EML2015fd%2E@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  console.log("CA MAAARCHE");
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
 });
 
 

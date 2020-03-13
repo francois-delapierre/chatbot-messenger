@@ -20,7 +20,7 @@ app.get("/", function (req, res) {
 
    // Here we find an appropriate database to connect to, defaulting to
    // localhost if we don't find one.
-   var uristring =   process.env.MONGOLAB_URI;
+   var uristring =   process.env.MONGODB_URI;
 
    // The http server will listen to an appropriate port, or default to
    // port 5000.

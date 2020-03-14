@@ -8,7 +8,7 @@ require 'vendor/autoload.php';
 
 $uri = "";
 
-$client = new MongoDB\Client("mongodb://heroku_4wq6mjkn:cnh4mlou3abk7sf9bbdcvbhvkk@ds037252.mlab.com:37252/heroku_4wq6mjkn");
+$client = new MongoDB\Client("mongodb+srv://francois-delapierre:EML2015fd%2E@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority");
 $collection = $client->demo->beers;
 
 $result = $collection->insertOne( [ 'name' => 'Hinterland', 'brewery' => 'BrewDog' ] );

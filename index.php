@@ -6,14 +6,12 @@
 <?php
 require 'vendor/autoload.php';
 
-$uri = "";
 
-$client = new MongoDB\Client("mongodb+srv://francois-delapierre:EML2015fd%2E@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority");
-$collection = $client->demo->beers;
+$client = new MongoDB\Client(
+    'mongodb+srv://francois-delapierre:EML2015fd.@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority');
 
-$result = $collection->insertOne( [ 'name' => 'Hinterland', 'brewery' => 'BrewDog' ] );
+$db = $client->test;
 
-echo "Inserted with Object ID '{$result->getInsertedId()}'";
  ?>
 
 

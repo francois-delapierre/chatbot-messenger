@@ -159,14 +159,14 @@ function processMessage(senderId,event){
                 subscriptionVDA: String,
                 });
             var UserModel = mongoose.model('users', UserSchema );
-  
+
 
             UserModel.count({psid: senderId}, function (err, count){
             if(count>0){
                 console.log('Utilisateur déjà présent dans la DB');
             }
             else {
-              var test_user = new UserModel({ psid: sendrId, subscriptionVDA:'true' });
+              var test_user = new UserModel({ psid: senderId, subscriptionVDA:'true' });
               test_user.save(function (err) {
                 if (err) return handleError(err);
                 });

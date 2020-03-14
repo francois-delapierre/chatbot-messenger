@@ -45,21 +45,10 @@ app.get("/", function (req, res) {
 
         });
 
-var UserModel = mongoose.model('UserModel', UserSchema );
+var UserModel = mongoose.model('users', UserSchema );
 
 
-UserModel.count({psid: '1234567'}, function (err, count){
-    if(count>0){
-        console.log('le psid 123456 existe déjà !');
-    }
-    else {
-      var test_user = new UserModel({ psid: '123456', subscriptionVDA:'Non' });
-      test_user.save(function (err) {
-        if (err) return handleError(err);
-        // saved!
-      });
-    }
-});
+
 
 
 
@@ -172,6 +161,22 @@ function processMessage(senderId,event){
 
     if(messagePayload == "ABONNEMENT")  {
         console.log("Payload détecté : " + messagePayload);
+
+
+            UserModel.count({psid: senderId}, function (err, count){
+            if(count>0){
+                console.log('Utilisateur déjà présent dans la DB');
+            }
+            else {
+              var test_user = new UserModel({ psid: sendrId, subscriptionVDA:'true' });
+              test_user.save(function (err) {
+                if (err) return handleError(err);
+                // saved!
+              });
+            }
+        });
+
+
         sendSelectCountry(senderId);
       }
 

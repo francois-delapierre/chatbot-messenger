@@ -13,41 +13,6 @@ app.get("/", function (req, res) {
 });
 
 
-//MongoDB Connexion
-
-   var http = require ('http');         // For serving a basic web page.
-   var mongoose = require ("mongoose"); // The reason for this demo.
-
-   // Here we find an appropriate database to connect to, defaulting to
-   // localhost if we don't find one.
-   var uristring =   process.env.MONGODB_URI;
-
-   // The http server will listen to an appropriate port, or default to
-   // port 5000.
-   var theport = process.env.PORT || 5000;
-
-   // Makes connection asynchronously.  Mongoose will queue up database
-   // operations and release them when the connection is complete.
-   mongoose.connect(uristring, function (err, res) {
-     if (err) {
-     console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-     } else {
-     console.log ('Succeeded connected to: ' + uristring);
-     }
-   });
-
-
-   var Schema = mongoose.Schema;
-
-   var UserSchema = new Schema({
-        psid: String,
-        subscriptionVDA: String,
-
-        });
-
-var UserModel = mongoose.model('users', UserSchema );
-
-
 
 
 
@@ -163,6 +128,39 @@ function processMessage(senderId,event){
         console.log("Payload détecté : " + messagePayload);
 
 
+
+
+
+        //MongoDB Connexion
+
+           var http = require ('http');         // For serving a basic web page.
+           var mongoose = require ("mongoose"); // The reason for this demo.
+
+           // Here we find an appropriate database to connect to, defaulting to
+           // localhost if we don't find one.
+           var uristring =   process.env.MONGODB_URI;
+
+           // The http server will listen to an appropriate port, or default to
+           // port 5000.
+           var theport = process.env.PORT || 5000;
+
+           // Makes connection asynchronously.  Mongoose will queue up database
+           // operations and release them when the connection is complete.
+           mongoose.connect(uristring, function (err, res) {
+             if (err) {
+             console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+             } else {
+             console.log ('Succeeded connected to: ' + uristring);
+             }
+           });
+           var Schema = mongoose.Schema;
+           var UserSchema = new Schema({
+                psid: String,
+                subscriptionVDA: String,
+                });
+            var UserModel = mongoose.model('users', UserSchema );
+  
+
             UserModel.count({psid: senderId}, function (err, count){
             if(count>0){
                 console.log('Utilisateur déjà présent dans la DB');
@@ -171,8 +169,7 @@ function processMessage(senderId,event){
               var test_user = new UserModel({ psid: sendrId, subscriptionVDA:'true' });
               test_user.save(function (err) {
                 if (err) return handleError(err);
-                // saved!
-              });
+                });
             }
         });
 

@@ -7,10 +7,20 @@
 require 'vendor/autoload.php';
 
 
-$client = new MongoDB\Client(
-    'mongodb+srv://francois-delapierre:EML2015fd.@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority');
 
-$db = $client->test;
+
+    try {
+      $mongo = new MongoDB\Client(
+          'mongodb+srv://francois-delapierre:EML2015fd.@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority');
+           print_r($mongo->listDatabases());
+     } catch (Exception $e) {
+           echo $e->getMessage();
+     }
+
+
+
+
+//$collection = $client->chatbot->notifications;
 
  ?>
 

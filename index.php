@@ -4,6 +4,8 @@
 <body>
   Bonjour Paris !
 <?php
+require 'vendor/autoload.php';
+
 $uri = "";
 
 $client = new MongoDB\Client("mongodb://heroku_4wq6mjkn:cnh4mlou3abk7sf9bbdcvbhvkk@ds037252.mlab.com:37252/heroku_4wq6mjkn");

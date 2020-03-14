@@ -11,7 +11,7 @@ require 'vendor/autoload.php';
 
     try {
       $mongo = new MongoDB\Client(
-          'mongodb+srv://francois-delapierre:EML2015fd.@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority');
+          'mongodb+srv://francois-delapierre:JzRPE5Q9zyhvJE9U@cluster0-8iyqx.mongodb.net/test?retryWrites=true&w=majority');
            print_r($mongo->listDatabases());
      } catch (Exception $e) {
            echo $e->getMessage();

@@ -172,7 +172,12 @@ function processMessage(senderId,event){
               UserModel.count({psid: senderId}, function (err, count){
               if(count>0){
               console.log('Utilisateur déjà présent dans la DB');
-              var currentUser =  UserModel.update({ psid : senderId },  { subscriptionVDA : "false" });
+              var currentUser =  UserModel.findOne({ psid : senderId },function(err,doc){
+                doc.subscriptionVDA ="false";
+                doc.save(function (err) {
+                  if (err) return handleError(err);
+                  });
+              });
 
               }
               else {
@@ -190,8 +195,19 @@ function processMessage(senderId,event){
 
 
 
-    else if(messagePayload == "SENEGAL")  {
+    else if(messagePayload == "SENEGAL" || messagePayload == "COTE_D_IVOIRE" || messagePayload == "BURKINA_FASO" )  {
         console.log("Payload détecté : " + messagePayload);
+
+          var currentUser =  UserModel.findOne({ psid : senderId },function(err,doc){
+                    doc.pays = messagePayload;
+                    doc.save(function (err) {
+                      if (err) return handleError(err);
+                      });
+                  });
+
+
+
+
         var message_a_envoyer = "D'ailleurs, tu veux bien nous dire quel visuel tu préfèrerais pour l'audiobook ? 🧐 📻 "
         sendShortMessage(senderId, message_a_envoyer);
         sendCarrouselSenegal(senderId);

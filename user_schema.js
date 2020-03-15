@@ -9,6 +9,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
      psid: String,
      subscriptionVDA: String,
+     pays : String
      });
  module.exports = mongoose.model('users', UserSchema );
 

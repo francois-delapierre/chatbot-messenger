@@ -148,7 +148,7 @@ function processMessage(senderId,event){
               doc.subscriptionVDA ="true";
               doc.save(function (err) {
                 if (err) return handleError(err);
-                }););
+                });
             });
             }
             else {

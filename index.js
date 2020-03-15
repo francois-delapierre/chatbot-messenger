@@ -143,7 +143,7 @@ function processMessage(senderId,event){
             UserModel.count({psid: senderId}, function (err, count){
             if(count>0){
             console.log('Utilisateur déjà présent dans la DB');
-            var currentUser =  UserModel.findOne({ pisd : senderId });
+            var currentUser =  UserModel.findOne({ psid : senderId });
             currentUser.updateOne({subscriptionVDA : 'true'});
             }
             else {
@@ -167,7 +167,7 @@ function processMessage(senderId,event){
               UserModel.count({psid: senderId}, function (err, count){
               if(count>0){
               console.log('Utilisateur déjà présent dans la DB');
-              var currentUser =  UserModel.findOne({ pisd : senderId });
+              var currentUser =  UserModel.findOne({ psid : senderId });
               currentUser.updateOne({subscriptionVDA : 'false'});
               }
               else {

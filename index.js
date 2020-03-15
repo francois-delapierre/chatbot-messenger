@@ -144,7 +144,12 @@ function processMessage(senderId,event){
             if(count>0){
             console.log('Utilisateur déjà présent dans la DB');
 
-            var currentUser =  UserModel.update({ psid : senderId }, { subscriptionVDA : "true" });
+            var currentUser =  UserModel.findOne({ psid : senderId },function(err,doc){
+              doc.subscriptionVDA ="true";
+              doc.save(function (err) {
+                if (err) return handleError(err);
+                }););
+            });
             }
             else {
               var currentUser = new UserModel({ psid: senderId, subscriptionVDA:'true' });

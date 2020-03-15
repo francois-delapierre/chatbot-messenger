@@ -15,7 +15,7 @@ require 'vendor/autoload.php';
 
           $collection = $mongo->heroku_4wq6mjkn->users;
 
-          $cursor = $collection->find();
+          $cursor = $collection->find(array("pays" => "SENEGAL"));;
           foreach ( $cursor as $id => $value )
           {
               echo "$id: ";

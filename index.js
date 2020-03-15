@@ -139,22 +139,50 @@ function processMessage(senderId,event){
         console.log("Payload détecté : " + messagePayload);
 
 
-
+            //On regarde si l'utilisateur existe déjà, si OUI on modifie pour mettre subscription sur TRUE, sinon, on crée et on met subscription sur TRUE
             UserModel.count({psid: senderId}, function (err, count){
             if(count>0){
-                console.log('Utilisateur déjà présent dans la DB');
+            console.log('Utilisateur déjà présent dans la DB');
+            var currentUser =  UserModel.findOne({ pisd : senderId });
+            currentUser.updateOne({subscriptionVDA : 'true'});
             }
             else {
-              var test_user = new UserModel({ psid: senderId, subscriptionVDA:'true' });
-              test_user.save(function (err) {
+              var currentUser = new UserModel({ psid: senderId, subscriptionVDA:'true' });
+              currentUser.save(function (err) {
                 if (err) return handleError(err);
                 });
-            }
-        });
+              }
+              });
 
 
         sendSelectCountry(senderId);
       }
+
+
+      else if(messagePayload == "NON_ABONNEMENT")  {
+          console.log("Payload détecté : " + messagePayload);
+
+
+              //On regarde si l'utilisateur existe déjà, si OUI on modifie pour mettre subscription sur TRUE, sinon, on crée et on met subscription sur TRUE
+              UserModel.count({psid: senderId}, function (err, count){
+              if(count>0){
+              console.log('Utilisateur déjà présent dans la DB');
+              var currentUser =  UserModel.findOne({ pisd : senderId });
+              currentUser.updateOne({subscriptionVDA : 'false'});
+              }
+              else {
+                var currentUser = new UserModel({ psid: senderId, subscriptionVDA:'false' });
+                currentUser.save(function (err) {
+                  if (err) return handleError(err);
+                  });
+                }
+                });
+
+                var message_a_envoyer = "Ok, tu n'es pas abonné ! Si tu changes d'avis, tu peux toujours utiliser les boutons dans le menu sous la barre de texte ! ;) "
+                sendShortMessage(senderId, message_a_envoyer);
+        }
+
+
 
 
     else if(messagePayload == "SENEGAL")  {

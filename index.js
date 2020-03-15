@@ -144,7 +144,7 @@ function processMessage(senderId,event){
             if(count>0){
             console.log('Utilisateur déjà présent dans la DB');
 
-            var currentUser =  UserModel.update({ psid : senderId }, $set : { subscriptionVDA : "true" });
+            var currentUser =  UserModel.update({ psid : senderId }, {$set : { subscriptionVDA : "true" }});
             }
             else {
               var currentUser = new UserModel({ psid: senderId, subscriptionVDA:'true' });
@@ -167,7 +167,7 @@ function processMessage(senderId,event){
               UserModel.count({psid: senderId}, function (err, count){
               if(count>0){
               console.log('Utilisateur déjà présent dans la DB');
-              var currentUser =  UserModel.update({ psid : senderId }, $set : { subscriptionVDA : "false" });
+              var currentUser =  UserModel.update({ psid : senderId }, {$set : { subscriptionVDA : "false" }});
 
               }
               else {

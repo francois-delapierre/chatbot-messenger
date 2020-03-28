@@ -13,6 +13,7 @@ require 'vendor/autoload.php';
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
   return str_repeat('Hello', getenv('PAGE_ACCESS_TOKEN'));
+  echo getenv('PAGE_ACCESS_TOKEN');
 });
 
     try {

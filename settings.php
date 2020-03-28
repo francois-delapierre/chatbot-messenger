@@ -10,11 +10,9 @@
 <?php
 require 'vendor/autoload.php';
 
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return str_repeat('Hello', getenv('PAGE_ACCESS_TOKEN'));
-  echo getenv('PAGE_ACCESS_TOKEN');
-});
+
+$page_access_token = getenv('PAGE_ACCESS_TOKEN');
+echo $page_access_token;
 
     try {
       $mongo = new MongoDB\Client(

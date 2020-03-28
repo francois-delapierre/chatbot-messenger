@@ -2,10 +2,13 @@
 <head>
 </head>
 <body>
-  Bonjour Paris !
+<div id="menu">
+<a href="index.php">Statistiques</a> <a href="settings.php">Settings</a>
+</div>
+
+
 <?php
 require 'vendor/autoload.php';
-
 
 
 
@@ -20,6 +23,7 @@ require 'vendor/autoload.php';
           {
               echo "$id: ";
               var_dump( $value );
+              echo $value['psid'];
           }
 
      } catch (Exception $e) {

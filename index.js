@@ -102,7 +102,8 @@ function processPostback(event) {
         var bodyObj = JSON.parse(body);
         name = bodyObj.first_name;
       }
-      sendGreeting(senderId,name);
+      activateTyping(senderId);
+      setTimeout(sendGreeting(senderId,name), 3000);
     });
   }
 
@@ -160,7 +161,7 @@ function processMessage(senderId,event){
               }
               });
 
-
+        activateTyping(senderId);
         sendSelectCountry(senderId);
       }
 
@@ -190,6 +191,7 @@ function processMessage(senderId,event){
                 });
 
                 var message_a_envoyer = "Ok, tu n'es pas abonné ! Si tu changes d'avis, tu peux toujours utiliser les boutons dans le menu sous la barre de texte ! ;) "
+                activateTyping(senderId);
                 sendShortMessage(senderId, message_a_envoyer);
         }
 
@@ -210,6 +212,7 @@ function processMessage(senderId,event){
 
 
         var message_a_envoyer = "D'ailleurs, tu veux bien nous dire quel visuel tu préfèrerais pour l'audiobook ? 🧐 📻 "
+        activateTyping(senderId);
         sendShortMessage(senderId, message_a_envoyer);
         sendCarrouselSenegal(senderId);
     }
@@ -221,23 +224,30 @@ function processMessage(senderId,event){
 
 
 
+
+function activateTyping(recipientId)
+{
+
+    request({
+      url: "https://graph.facebook.com/v2.6/me/messages",
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+      method: "POST",
+      json: {
+        recipient: {id: recipientId}
+      },
+      sender_action:"typing_on"
+    }, function(error, response, body) {
+      if (error) {
+        console.log("Error sending message: " + response.error);
+      }
+    });
+
+
+}
+
+
+
 function sendShortMessage(recipientId, message) {
-
-//Activation du typing_on
-  request({
-    url: "https://graph.facebook.com/v2.6/me/messages",
-    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-    method: "POST",
-    json: {
-      recipient: {id: recipientId}
-    },
-    sender_action:"typing_on"
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
-    }
-  });
-
 
 //Envoi du message
   request({
@@ -301,6 +311,27 @@ function sendGreeting(recipientId,userName) {
       console.log("Error sending message: " + response.error);
     }
   });
+
+
+
+  //Désactivation du typing_on => typing_off
+    request({
+      url: "https://graph.facebook.com/v2.6/me/messages",
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+      method: "POST",
+      json: {
+        recipient: {id: recipientId}
+      },
+      sender_action:"typing_off"
+    }, function(error, response, body) {
+      if (error) {
+        console.log("Error sending message: " + response.error);
+      }
+    });
+
+
+
+
 }
 
 

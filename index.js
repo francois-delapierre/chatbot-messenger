@@ -83,6 +83,7 @@ function processPostback(event) {
   var payload = event.postback.payload;
 
   //activatePersistentMenu(senderId);
+  //désactivé pour test
 
   if (payload === "Greeting") {
     // Get user's first name from the User Profile API

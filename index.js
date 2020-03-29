@@ -71,6 +71,10 @@ app.post("/webhook", function (req, res) {
         {
           processMessage(sender_psid,event);
         }
+        else
+        {
+          sendShortMessage(sender_psid,"Merci pour votre message, nous essaierons d'y répondre dans les plus brefs délais");
+        }
       });
     });
 
@@ -221,49 +225,25 @@ function processMessage(senderId,event){
 
 
 
+function sendShortMessage(recipientId, message) {
 
-
-function activatePersistentMenu(recipientId) {
-  console.log("Fonction en cours : activatePersistentMenu");
+//Activation du typing_on
   request({
-    url: "https://graph.facebook.com/v6.0/me/custom_user_settings",
+    url: "https://graph.facebook.com/v2.6/me/messages",
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
     method: "POST",
     json: {
-      psid : recipientId,
-      persistent_menu: [
-        {locale : "default",
-        composer_input_disabled : "false",
-        call_to_actions : [
-          {
-            type : "postback",
-            title : "Parler à la team YouScribe !",
-            payload : "TALK_TO_YOUSCRIBE"
-          },
-          {
-            type : "postback",
-            title : "Redémarrer le bot",
-            payload : "Greeting"
-          },
-          {
-            type : "web_url",
-            title : "Aller sur YouScribe",
-            url : "https://www.youscribe.com/",
-            webview_height_ratio : "full"
-          }
-        ]
-        }
-      ]
-    }
+      recipient: {id: recipientId}
+    },
+    sender_action:"typing_on"
   }, function(error, response, body) {
     if (error) {
       console.log("Error sending message: " + response.error);
     }
   });
-}
 
 
-function sendShortMessage(recipientId, message) {
+//Envoi du message
   request({
     url: "https://graph.facebook.com/v2.6/me/messages",
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -277,6 +257,24 @@ function sendShortMessage(recipientId, message) {
       console.log("Error sending message: " + response.error);
     }
   });
+
+
+//Désactivation du typing_on => typing_off
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messages",
+    qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+    method: "POST",
+    json: {
+      recipient: {id: recipientId}
+    },
+    sender_action:"typing_off"
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+  });
+
+
 }
 
 

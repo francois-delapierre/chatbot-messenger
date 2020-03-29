@@ -71,6 +71,10 @@ app.post("/webhook", function (req, res) {
         {
           processMessage(sender_psid,event);
         }
+        else
+        {
+          sendShortMessage(sender_psid,"Merci pour votre message, nous essaierons d'y répondre dans les plus brefs délais");
+        }
       });
     });
 

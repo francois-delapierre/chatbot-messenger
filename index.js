@@ -119,6 +119,12 @@ if(req.body.object=="send_notifications")
 function sendNotifications(newspaper_id, newspaper_url) {
 
 
+  UserModel.
+    find({newspaper_id:newspaper_id}).
+    cursor().
+    on('data', function(doc) { console.log(doc); }).
+    on('end', function() { console.log('Done!'); });
+
   co(function*() {
     const cursor = UserModel.find({newspaper_id:newspaper_id}).cursor();
     for (let doc = yield cursor.next(); doc != null; doc = yield cursor.next()) {

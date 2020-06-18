@@ -55,9 +55,39 @@ if (req.header("VERIFICATION_TOKEN") === process.env.VERIFICATION_TOKEN) {
   if(req.body.object=="notifications")
   {
     console.log(req.body.user_id);
+    console.log(req.body.newspaper);
+    console.log(req.body.status);
+
+
+    //On regarde si l'utilisateur existe déjà, si OUI on modifie pour mettre subscription sur TRUE, sinon, on crée et on met subscription sur TRUE
+    UserModel.count({chatfuel_user_id: req.body.user_id , newspaper_id:req.body.newspaper}, function (err, count){
+    if(count>0){
+    console.log('Utilisateur déjà présent dans la DB');
+
+    var currentUser =  UserModel.findOne({ psid : senderId },function(err,doc){
+      doc.subscriptionVDA ="true";
+      doc.save(function (err) {
+        if (err) return handleError(err);
+        });
+    });
+    }
+    else {
+      var currentUser = new UserModel({ chatfuel_user_id: req.body.user_id , newspaper_id:req.body.newspaper });
+      currentUser.save(function (err) {
+        if (err) return handleError(err);
+        });
+      }
+      });
+
+
+
+
 
   }
+  res.sendStatus(200);
 }
+/*
+
   if (req.body.object == "page") {
     // Iterate over each entry
     // There may be multiple entries if batched
@@ -89,10 +119,8 @@ if (req.header("VERIFICATION_TOKEN") === process.env.VERIFICATION_TOKEN) {
 
     res.sendStatus(200);
   }
-else {
-  console.log("not a page subscription");
-}
 
+*/
 });
 
 

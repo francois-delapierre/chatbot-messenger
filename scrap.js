@@ -59,7 +59,7 @@ NewspaperModel.
                {
                  var urlNewspaper = "http://www.youscribe.com/Product/Index/"+lastId;
                  console.log("Id mis à jour pour"+doc.editor_name);
-                 sendNotifications(doc.editor_name,url, doc.real_name);
+                 sendNotifications(doc.editor_name,urlNewspaper, doc.real_name);
                }
 
              });

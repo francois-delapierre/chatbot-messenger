@@ -32,13 +32,6 @@ console.log ('Succeeded connected to: ' + uristring);
 
 
 
-NewspaperModel.
-  find().
-  cursor().
-  on('data', function(doc) {
-    console.log(doc.real_name);
-  }).
-  on('end', function() { console.log('Journaux trouvés!'); });
 
 //Verification du webhook si besoin
 
@@ -112,7 +105,7 @@ if(req.body.object=="send_notifications")
       if(!err)
       {
         console.log("Notifications prêtes à être envoyées");
-       sendNotifications(req.body.newspaper_id,req.body.newspaper_url);
+       
       }
 
     });
@@ -122,52 +115,3 @@ if(req.body.object=="send_notifications")
   res.sendStatus(200);
 }
 });
-
-
-
-function sendNotifications(newspaper_id, newspaper_url) {
-
-
-  UserModel.
-    find({newspaper_id:newspaper_id}).
-    cursor().
-    on('data', function(doc) {
-
-      var user_id = doc.chatfuel_user_id;
-      var newspaper_url = doc.newspaper_url;
-      var url = "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/"+user_id+"/send";
-
-      request({
-        url: url,
-        qs: { chatfuel_token : process.env.CHATFUEL_TOKEN,
-              chatfuel_message_tag : "ACCOUNT_UPDATE",
-              chatfuel_block_name : "test",
-              newspaper_url : newspaper_url
-        },
-        method: "POST"
-      }, function(error, response, body) {
-        if (error) {
-          console.log("Error sending message: " + response.error);
-        }
-      });
-
-      console.log(doc.chatfuel_user_id);
-
-    }).
-    on('end', function() { console.log('Notifications envoyées!'); });
-
-
-/*
-
-
-  request({
-    url: "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/3876548032385982/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_message_tag=ACCOUNT_UPDATE&chatfuel_block_name=test&newspaper_id=gbich-editions",
-    method: "POST"
-  }, function(error, response, body) {
-    if (error) {
-      console.log("Error sending message: " + response.error);
-    }
-    if(!error) console.log("Notification envoyée");
-  });
-*/
-}

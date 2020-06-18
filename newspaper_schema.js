@@ -11,6 +11,6 @@ var NewspaperSchema = new Schema({
      real_name: String,
      last_id:String
      });
- module.exports = mongoose.model('newspaper', NewspaperSchema );
+ module.exports = mongoose.model('newspapers', NewspaperSchema );
 
 //var UserModel = mongoose.model('users', UserSchema );

@@ -100,16 +100,33 @@ if(req.body.object=="send_notifications")
   UserModel.updateMany({newspaper_id : req.body.newspaper_id},{newspaper_url:req.body.newspaper_url},function(err){
 
       if (err) return handleError(err);
-      if(!err) console.log("Notifications prêtes à être envoyées");
+      if(!err)
+      {
+        console.log("Notifications prêtes à être envoyées");
+       sendNotifications(req.body.newspaper_id,req.body.newspaper_url);
+      }
 
     });
 
 }
 
-
-
-
-
   res.sendStatus(200);
 }
 });
+
+
+
+function sendNotifications(newspaper_id, newspaper_url) {
+
+
+  request({
+    url: "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/3876548032385982/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_message_tag=ACCOUNT_UPDATE&chatfuel_block_name=test&newspaper_id=gbich-editions",
+    method: "POST"
+  }, function(error, response, body) {
+    if (error) {
+      console.log("Error sending message: " + response.error);
+    }
+    if(!error) console.log("Notification envoyée");
+  });
+
+}

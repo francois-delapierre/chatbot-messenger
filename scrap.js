@@ -20,13 +20,13 @@ console.log ('Succeeded connected to: ' + uristring);
 
 
 
-co(function*() {
-  const cursor = NewspaperModel.find().cursor();
-  for (let doc = yield cursor.next(); doc != null; doc = yield cursor.next()) {
-    console.log("bonjour");
-    console.log(doc);
-  }
-});
+NewspaperModel.
+  find().
+  cursor().
+  on('data', function(doc) {
+    console.log(doc.real_name);
+  }).
+  on('end', function() { console.log('Journaux trouvés!'); });
 
 /*
 var editor_name = doc.editor_name;

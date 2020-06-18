@@ -32,6 +32,14 @@ console.log ('Succeeded connected to: ' + uristring);
 
 
 
+NewspaperModel.
+  find().
+  cursor().
+  on('data', function(doc) {
+    console.log(doc.real_name);
+  }).
+  on('end', function() { console.log('Journaux trouvés!'); });
+
 //Verification du webhook si besoin
 
 app.get("/webhook", function (req, res) {

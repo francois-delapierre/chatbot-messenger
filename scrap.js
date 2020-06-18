@@ -104,7 +104,7 @@ NewspaperModel.
         console.log(doc.chatfuel_user_id);
 
       }).
-      on('end', function() { console.log('Notifications envoyées!'); setTimeout(process.exit(), 20000););
+      on('end', function() { console.log('Notifications envoyées!'); setTimeout(process.exit(), 20000);});
 
 
 

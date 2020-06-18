@@ -38,9 +38,12 @@ console.log ('Succeeded connected to: ' + uristring);
 app.get("/webhook", function (req, res) {
   if (req.query["VERIFICATION_TOKEN"] === process.env.VERIFICATION_TOKEN) {
     console.log("Verified webhook");
+
     res.status(200).send(req.query["hub.challenge"]);
   } else {
     console.error("Verification failed. The tokens do not match.");
+    console.log(process.env.VERIFICATION_TOKEN);
+    console.log(req.query["VERIFICATION_TOKEN"]);
     res.sendStatus(403);
   }
 });

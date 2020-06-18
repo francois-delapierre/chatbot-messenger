@@ -49,8 +49,11 @@ app.get("/webhook", function (req, res) {
 // Traitement des requêtes POST
 app.post("/webhook", function (req, res) {
 
-  // Gestion des notifications
+
 if (req.header("VERIFICATION_TOKEN") === process.env.VERIFICATION_TOKEN) {
+
+  // Gestion des notifications
+
   if(req.body.object=="notifications")
   {
     console.log(req.body.user_id);
@@ -69,7 +72,7 @@ if (req.header("VERIFICATION_TOKEN") === process.env.VERIFICATION_TOKEN) {
 
         if (err) return handleError(err);
         if(!err) console.log("notification supprimée");
-        
+
       });
     }
 
@@ -85,6 +88,28 @@ if (req.header("VERIFICATION_TOKEN") === process.env.VERIFICATION_TOKEN) {
       }
       });
   }
+
+
+
+//Envoi des notifications via les requêtes du backend Youscribe
+if(req.body.object=="send_notifications")
+{
+  console.log(req.body.newspaper_id);
+  console.log(req.body.newspaper_url);
+
+  UserModel.updateMany({newspaper_id : req.body.newspaper_id},{newspaper_url:req.body.newspaper_url},function(err){
+
+      if (err) return handleError(err);
+      if(!err) console.log("Notifications prêtes à être envoyées");
+
+    });
+
+}
+
+
+
+
+
   res.sendStatus(200);
 }
 });

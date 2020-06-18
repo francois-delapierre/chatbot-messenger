@@ -33,7 +33,7 @@ console.log ('Succeeded connected to: ' + uristring);
 
 // Facebook Webhook
 // Used for verification
-/*
+
 
 app.get("/webhook", function (req, res) {
   if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
@@ -45,7 +45,6 @@ app.get("/webhook", function (req, res) {
   }
 });
 
-*/
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
   // Make sure this is a page subscription

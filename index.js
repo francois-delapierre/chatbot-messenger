@@ -33,6 +33,8 @@ console.log ('Succeeded connected to: ' + uristring);
 
 // Facebook Webhook
 // Used for verification
+/*
+
 app.get("/webhook", function (req, res) {
   if (req.query["hub.verify_token"] === process.env.VERIFICATION_TOKEN) {
     console.log("Verified webhook");
@@ -43,7 +45,7 @@ app.get("/webhook", function (req, res) {
   }
 });
 
-
+*/
 // All callbacks for Messenger will be POST-ed here
 app.post("/webhook", function (req, res) {
   // Make sure this is a page subscription
@@ -55,6 +57,8 @@ app.post("/webhook", function (req, res) {
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+
+
 
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
@@ -76,8 +80,14 @@ app.post("/webhook", function (req, res) {
 
     res.sendStatus(200);
   }
+else {
+  console.log("not a page subscription");
+}
+
 });
 
+
+/*
 function processPostback(event) {
   var senderId = event.sender.id;
   var payload = event.postback.payload;
@@ -128,7 +138,10 @@ function processPostback(event) {
 
 
 }
+*/
 
+
+/*
 function processMessage(senderId,event){
   console.log("Fonction en cours : processMessage");
 
@@ -357,3 +370,4 @@ function sendCarrouselSenegal(recipientId) {
     }
   });
 }
+*/

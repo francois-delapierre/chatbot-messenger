@@ -118,11 +118,17 @@ if(req.body.object=="send_notifications")
 
 function sendNotifications(newspaper_id, newspaper_url) {
 
+
+  const cursor = UserModel.find({newspaper_id:newspaper_id}).cursor();
+   for (let doc = yield cursor.next(); doc != null; doc = yield cursor.next()) {
+     console.log(doc);
+   }
+/*
   UserModel.find({newspaper_id:newspaper_id}).forEach(function(err, doc) {
     console.log("Entrée dans la boucle foreach");
     console.log(doc.chatfuel_user_id);
   });
-/*
+
   request({
     url: "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/3876548032385982/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_message_tag=ACCOUNT_UPDATE&chatfuel_block_name=test&newspaper_id=gbich-editions",
     method: "POST"

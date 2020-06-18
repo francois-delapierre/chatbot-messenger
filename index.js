@@ -122,7 +122,7 @@ function sendNotifications(newspaper_id, newspaper_url) {
   UserModel.
     find({newspaper_id:newspaper_id}).
     cursor().
-    on('data', function(doc) { console.log(doc); }).
+    on('data', function(doc) { console.log(doc.chatfuel_user_id); }).
     on('end', function() { console.log('Done!'); });
 
 

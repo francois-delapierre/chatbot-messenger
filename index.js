@@ -1,6 +1,12 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
+
+const rp = require('request-promise');
+const $ = require('cheerio');
+var fs = require('fs');
+var co = require('co');
+
 var UserModel = require('./user_schema.js');
 var NewspaperModel = require('./newspaper_schema.js');
 
@@ -105,7 +111,7 @@ if(req.body.object=="send_notifications")
       if(!err)
       {
         console.log("Notifications prêtes à être envoyées");
-       
+
       }
 
     });

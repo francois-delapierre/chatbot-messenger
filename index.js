@@ -130,7 +130,7 @@ function sendNotifications(newspaper_id, newspaper_url) {
 
       request({
         url: url,
-        qs: { chatfuel_token : env.CHATFUEL_TOKEN,
+        qs: { chatfuel_token : process.env.CHATFUEL_TOKEN,
               chatfuel_message_tag : "ACCOUNT_UPDATE",
               chatfuel_block_name : "test",
               newspaper_url : newspaper_url

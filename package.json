@@ -14,7 +14,7 @@
     "co": "^4.6.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.19",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
   }
 }
- 

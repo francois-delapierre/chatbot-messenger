@@ -2,6 +2,7 @@ var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
 var UserModel = require('./user_schema.js');
+var NewspaperModel = require('./newspaper_schema.js');
 
 var app = express();
 

@@ -122,15 +122,34 @@ function sendNotifications(newspaper_id, newspaper_url) {
   UserModel.
     find({newspaper_id:newspaper_id}).
     cursor().
-    on('data', function(doc) { console.log(doc.chatfuel_user_id); }).
-    on('end', function() { console.log('Done!'); });
+    on('data', function(doc) {
+
+      var user_id = doc.chatfuel_user_id;
+      var newspaper_url = doc.newspaper_url;
+      var url = "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/".user_id."/send";
+
+      request({
+        url: url,
+        qs: { chatfuel_token : env.CHATFUEL_TOKEN,
+              chatfuel_message_tag : "ACCOUNT_UPDATE",
+              chatfuel_block_name : "test",
+              newspaper_url : newspaper_url
+        },
+        method: "POST"
+      }, function(error, response, body) {
+        if (error) {
+          console.log("Error sending message: " + response.error);
+        }
+      });
+
+      console.log(doc.chatfuel_user_id);
+
+    }).
+    on('end', function() { console.log('Notifications envoyées!'); });
 
 
 /*
-  UserModel.find({newspaper_id:newspaper_id}).forEach(function(err, doc) {
-    console.log("Entrée dans la boucle foreach");
-    console.log(doc.chatfuel_user_id);
-  });
+
 
   request({
     url: "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/3876548032385982/send?chatfuel_token=mELtlMAHYqR0BvgEiMq8zVek3uYUK3OJMbtyrdNPTrQB9ndV0fM7lWTFZbM4MZvD&chatfuel_message_tag=ACCOUNT_UPDATE&chatfuel_block_name=test&newspaper_id=gbich-editions",

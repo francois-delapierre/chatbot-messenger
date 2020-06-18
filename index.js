@@ -126,7 +126,7 @@ function sendNotifications(newspaper_id, newspaper_url) {
 
       var user_id = doc.chatfuel_user_id;
       var newspaper_url = doc.newspaper_url;
-      var url = "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/".user_id."/send";
+      var url = "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/"+user_id+"/send";
 
       request({
         url: url,

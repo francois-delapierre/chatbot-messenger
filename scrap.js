@@ -58,7 +58,7 @@ NewspaperModel.
                if(!err)
                {
                  var urlNewspaper = "http://www.youscribe.com/Product/Index/"+lastId;
-                 console.log("Id mis à jour pour"+doc.editor_name);
+                 console.log("Id mis à jour pour "+doc.editor_name);
                  sendNotifications(doc.editor_name,urlNewspaper, doc.real_name);
                }
 
@@ -72,7 +72,6 @@ NewspaperModel.
 
   }).
   on('end', function() { console.log('Vérification des journaux les plus récents terminée'); });
-
 
 
 
@@ -105,7 +104,7 @@ NewspaperModel.
         console.log(doc.chatfuel_user_id);
 
       }).
-      on('end', function() { console.log('Notifications envoyées!'); });
+      on('end', function() { console.log('Notifications envoyées!'); process.exit();});
 
 
 

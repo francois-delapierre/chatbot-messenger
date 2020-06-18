@@ -125,12 +125,7 @@ function sendNotifications(newspaper_id, newspaper_url) {
     on('data', function(doc) { console.log(doc); }).
     on('end', function() { console.log('Done!'); });
 
-  co(function*() {
-    const cursor = UserModel.find({newspaper_id:newspaper_id}).cursor();
-    for (let doc = yield cursor.next(); doc != null; doc = yield cursor.next()) {
-      console.log(doc);
-    }
-  });
+
 /*
   UserModel.find({newspaper_id:newspaper_id}).forEach(function(err, doc) {
     console.log("Entrée dans la boucle foreach");

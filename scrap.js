@@ -71,7 +71,7 @@ NewspaperModel.
       });
 
   }).
-  on('end', function() { console.log('Notifications envoyées!'); });
+  on('end', function() { console.log('Vérification des journaux les plus récents terminée'); });
 
 
 
@@ -85,7 +85,6 @@ NewspaperModel.
       on('data', function(doc) {
 
         var user_id = doc.chatfuel_user_id;
-        var newspaper_url = doc.newspaper_url;
         var url = "https://api.chatfuel.com/bots/5eea2db2011f3036ca77eada/users/"+user_id+"/send";
 
         request({

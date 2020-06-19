@@ -9,11 +9,12 @@ var NewspaperModel = require('./newspaper_schema.js');
 var UserModel = require('./user_schema.js');
 
 
-
+//Définition des paramètres de connexion à Mongoose
 var uristring =   process.env.MONGODB_URI || "mongodb://heroku_4wq6mjkn:cnh4mlou3abk7sf9bbdcvbhvkk@ds037252.mlab.com:37252/heroku_4wq6mjkn";
 var theport = process.env.PORT || 5000;
 
 
+//Connexion à Mongoose
 mongoose.connect(uristring, function (err, res) {
 if (err) {
 console.log ('ERROR connecting to: ' + uristring + '. ' + err);

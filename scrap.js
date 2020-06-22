@@ -36,7 +36,7 @@ NewspaperModel.
         //success!
         const newspaperUrls = [];
         const newspaperId =[];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 4; i++) {
           if($('.l-productResult-thumb > a', html)[i].attribs.href)
           {
           newspaperUrls.push($('.l-productResult-thumb > a', html)[i].attribs.href);

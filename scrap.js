@@ -37,13 +37,14 @@ NewspaperModel.
         const newspaperUrls = [];
         const newspaperId =[];
         for (let i = 0; i < 10; i++) {
-
+          if($('.l-productResult-thumb > a', html)[i].attribs.href)
+          {
           newspaperUrls.push($('.l-productResult-thumb > a', html)[i].attribs.href);
 
           var href=$('.l-productResult-thumb > a', html)[i].attribs.href;
           var id= href.substring(href.length - 7, href.length);
           newspaperId.push(id);
-
+        }
         }
 
         var lastId=Math.max(...newspaperId);

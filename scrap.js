@@ -10,7 +10,7 @@ var UserModel = require('./user_schema.js');
 
 
 //Définition des paramètres de connexion à Mongoose
-var uristring =   process.env.MONGODB_URI || "mongodb://heroku_4wq6mjkn:cnh4mlou3abk7sf9bbdcvbhvkk@ds037252.mlab.com:37252/heroku_4wq6mjkn";
+var uristring =   process.env.MONGODB_URI ;
 var theport = process.env.PORT || 5000;
 
 
@@ -36,7 +36,7 @@ NewspaperModel.
         //success!
         const newspaperUrls = [];
         const newspaperId =[];
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 3; i++) {
           if($('.l-productResult-thumb > a', html)[i].attribs.href)
           {
           newspaperUrls.push($('.l-productResult-thumb > a', html)[i].attribs.href);
@@ -111,3 +111,7 @@ NewspaperModel.
 
 
   }
+
+  setTimeout((function() {
+    return process.exit(22);
+}), 300000);

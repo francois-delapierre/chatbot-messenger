@@ -59,7 +59,7 @@ NewspaperModel.
                if (err) return handleError(err);
                if(!err)
                {
-                 var urlNewspaper = "http://www.youscribe.com/Product/Index/"+lastId;
+                 var urlNewspaper = "http://www.youscribe.com/Product/Index/"+lastId+"?utm_source=botmessenger&utm_medium=messenger&utm_campaign=testbot";
                  console.log("Id mis à jour pour "+doc.editor_name);
                  sendNotifications(doc.editor_name,urlNewspaper, doc.real_name);
                }

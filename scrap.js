@@ -92,7 +92,7 @@ NewspaperModel.
           url: url,
           qs: { chatfuel_token : process.env.CHATFUEL_TOKEN,
                 chatfuel_message_tag : "ACCOUNT_UPDATE",
-                chatfuel_block_name : "test",
+                chatfuel_block_name : "api-notifications",
                 newspaper_name : newspaper_name,
                 newspaper_url : newspaper_url
           },
@@ -102,9 +102,7 @@ NewspaperModel.
             console.log("Error sending message: " + response.error);
           }
         });
-
         console.log(doc.chatfuel_user_id);
-
       }).
       on('end', function() { console.log('Notifications envoyées!'); });
 

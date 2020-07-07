@@ -8,8 +8,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
      chatfuel_user_id: String,
-     newspaper_id: String,
-     newspaper_url:String
+     newspaper_id: String
      });
  module.exports = mongoose.model('notifications', UserSchema );
 
